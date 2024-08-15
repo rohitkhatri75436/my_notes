@@ -1,1 +1,44 @@
+-- SQL OPERATIONS --
 
+-- Fetch all data from sql database --
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM Customers;
+
+
+-- USE DISTINCT KEYWORD:
+-- 'SELECT' > select data from a database
+-- 'Distinct' > return only unique values, eliminating duplicates ***
+-- 'Country' > specify the column(s) to retrieve data from
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT Distinct Country FROM Customers ;
+
+-- USE COLUMN NAMES INSTEAD OF '*' :
+-- 'SELECT' > select data from a database
+-- 'CustomerName' > specify the column(s) to retrieve data from ***
+-- 'PostalCode' > specify the column(s) to retrieve data from
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT CustomerName,PostalCode FROM Customers;
+
+-- WHERE CONDITION FOR NOT EQUAL (<>) SAME AS "!=" :
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Products' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'Price' > The column to apply the condition to
+-- '<>' > Not equal to, returns rows where the value is not equal to the specified value ***
+-- '18' > The value to compare against
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM Products WHERE Price <> 18;
