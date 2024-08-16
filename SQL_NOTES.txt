@@ -8,7 +8,7 @@
 -- ';' > Statement terminator, indicating the end of the SQL query
 
 SELECT * FROM Customers;
-
+---------------------------------------------------------------------------------------------------------
 
 -- USE DISTINCT KEYWORD:
 -- 'SELECT' > select data from a database
@@ -19,6 +19,7 @@ SELECT * FROM Customers;
 -- ';' > Statement terminator, indicating the end of the SQL query
 
 SELECT Distinct Country FROM Customers ;
+---------------------------------------------------------------------------------------------------------
 
 -- USE COLUMN NAMES INSTEAD OF '*' :
 -- 'SELECT' > select data from a database
@@ -29,6 +30,7 @@ SELECT Distinct Country FROM Customers ;
 -- ';' > Statement terminator, indicating the end of the SQL query
 
 SELECT CustomerName,PostalCode FROM Customers;
+---------------------------------------------------------------------------------------------------------
 
 -- WHERE CONDITION FOR NOT EQUAL (<>) SAME AS "!=" :
 -- 'SELECT' > select data from a database
@@ -42,3 +44,98 @@ SELECT CustomerName,PostalCode FROM Customers;
 -- ';' > Statement terminator, indicating the end of the SQL query
 
 SELECT * FROM Products WHERE Price <> 18;
+---------------------------------------------------------------------------------------------------------
+
+-- USE OF "BETWEEN" AND "AND" KEYWORD
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'CustomerID' > The column to apply the condition to
+-- 'BETWEEN' > Select values within a given range ***
+-- '2' > The lower bound of the range (inclusive)
+-- 'AND' > Used to specify the upper bound of the range ***
+-- '6' > The upper bound of the range (inclusive)
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM Customers WHERE CustomerID BETWEEN 2 AND 6;
+---------------------------------------------------------------------------------------------------------
+
+-- SEARCH FOR A PATTERN (USING LIKE KEYWORD) --
+
+-- USE "LIKE" KEYWORD TO FIND RESULT AS LIKE "CONTAINS" FUNCTIONALITY, THE "BER%" MEANS FIND WORDS WHICH STARTS FROM "BER" AND FOR "%LIN" MEANS FIND WORDS ENDS ON "LIN". ITS MEAN THE "%" COVERING REMAIN CHARACTERS
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'City' > The column to apply the condition to
+-- 'LIKE' > Used to search for a specified pattern in a column ***
+-- 'Ber%' > Find words that start with "Ber" (the "%" covers the remaining characters) ***
+-- ';' > Statement terminator, indicating the end of the SQL query
+--------------------------------OR--------------------------------
+SELECT * FROM Customers WHERE City LIKE 'Ber%';
+
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'City' > The column to apply the condition to
+-- 'LIKE' > Used to search for a specified pattern in a column ***
+-- '%lin' > Find words that end with "lin" (the "%" covers the preceding characters) ***
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM Customers WHERE City LIKE '%lin';
+---------------------------------------------------------------------------------------------------------
+
+-- USE 'IN' KEYWORD TO FIND IF THE VALUES(ROWS) CONTAINS VALUE IN GIVEN LIST OR TUPPLE (IN CONTEXT OF PYTHON)
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'customers' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'Country' > The column to apply the condition to
+-- 'IN' > Used to specify multiple values to search for in the column ***
+-- '(' > Start of the list of values to search for
+-- 'uk','mexico', 'germany' > The list of values to search for (separated by commas)
+-- ')' > End of the list of values to search for
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM customers WHERE Country IN ('uk','mexico', 'germany');
+---------------------------------------------------------------------------------------------------------
+
+-- USE "ORDER BY" KEYWORD TO SORT A LIST ACCORDING TO COLUMN AND SORT TYPE (AFTER COLUMN) > "ASC|DESC" ("ASC" TO SORT ASCENDING ORDER AND "DESC" TO DESCENDING ORDER.
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'customers' > The specific table that contains the data we want to select
+-- 'ORDER BY' > Used to sort the result set in ascending or descending order ***
+-- 'country' > The column to sort on
+-- 'DESC' > Sort the result set in descending order ***
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM customers ORDER BY country DESC;
+
+---------------------------------------------------------------------------------------------------------
+
+-- USE "AND"/"OR" KEYWORD TO USE MULTIPLE CONDITIONS, YOU CAN ALSO WRITE MULTIPLE CONDITIONS IN BREAKETS LIKE BELOW
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'CustomerName' > The column to apply the first condition to
+-- 'LIKE' > Used to search for a specified pattern in a column
+-- 'A%' > Find words that start with "A" (the "%" covers the remaining characters)
+-- 'AND' > Used to combine multiple conditions ***
+-- 'CustomerID' > The column to apply the second condition to
+-- 'BETWEEN' > Select values within a given range
+-- '1' > The lower bound of the range (inclusive)
+-- 'AND' > Used to specify the upper bound of the range
+-- '2' > The upper bound of the range (inclusive)
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT * FROM Customers Where CustomerName like "A%" and (CustomerID between 1 and 2 OR CustomerID between 6 and 10);
+
