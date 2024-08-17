@@ -139,3 +139,75 @@ SELECT * FROM customers ORDER BY country DESC;
 
 SELECT * FROM Customers Where CustomerName like "A%" and (CustomerID between 1 and 2 OR CustomerID between 6 and 10);
 
+---------------------------------------------------------------------------------------------------------
+-- USE OF "NOT" BEFORE CONDITION TO GET THE OPPOSITE RESULT OF CONDITION AS LIKE ((!FALSE) == TRUE)
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'employees' > The specific table that contains the data we want to select
+-- 'WHERE' > Specify the condition(s) for which rows to include in the results
+-- 'NOT' > Used to negate the result of the following condition ***
+-- 'EmployeeID' > The column to apply the first condition to
+-- '=' > Equal to, returns rows where the value is equal to the specified value
+-- '9' > The value to compare against
+-- 'AND' > Used to combine multiple conditions ***
+-- '(' > Start of the group of conditions
+-- 'OR' > Used to specify an alternative condition ***
+-- 'Lastname' > The column to apply the second condition to
+-- 'LIKE' > Used to search for a specified pattern in a column
+-- 'D%' > Find words that start with "D" (the "%" covers the remaining characters)
+-- 'LIKE' > Used to search for a specified pattern in a column
+-- 'F%' > Find words that start with "F" (the "%" covers the remaining characters)
+-- ')' > End of the group of conditions
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+Select * from employees where not EmployeeID=9 AND (Lastname Like "D%" OR Lastname Like "F%");
+
+---------------------------------------------------------------------------------------------------------
+-- USE "GROUP BY" KEYWORDS TO GROUP VALUES(ROWS'S VALUES) AND CAN ALSO SORT IT BY ORDER USING "ORDER BY". AND YOU CAN ALSO USE ALIAS USING "AS" KEYWORD.
+-- 'SELECT' > select data from a database
+-- 'COUNT' > Used to count the number of rows that match the specified condition
+-- 'CustomerID' > The column to count
+-- 'AS' > Used to give an alias to the column ***
+-- 'COUNTS' > The alias for the COUNT column
+-- 'Country' > The column to group by
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'Customers' > The specific table that contains the data we want to select
+-- 'GROUP BY' > Used to group the result set by one or more columns ***
+-- 'Country' > The column to group by
+-- 'ORDER BY' > Used to sort the result set in ascending or descending order ***
+-- 'COUNT(CustomerID)' > The column to sort on
+-- 'DESC' > Sort the result set in descending order ***
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+SELECT COUNT(CustomerID) as COUNTS, Country FROM Customers GROUP BY Country  Order By COUNT(CustomerID) DESC;
+NOTE: in above example we get the count of all indidual country. 
+
+---------------------------------------------------------------------------------------------------------
+
+-- TO DUPLICATE AN OLD TABLE STRUCTURE :
+-- 'CREATE TABLE' > Create a new table in the database
+-- 'CustomerTest' > The name of the new table to be created ***
+-- 'LIKE' > Duplicate the structure of an existing table
+-- 'customers' > The name of the existing table to duplicate the structure from ***
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+CREATE TABLE CustomerTest LIKE customers;
+
+---------------------------------------------------------------------------------------------------------
+-- INNER JOIN TWO TABLE'S ROWS USING "INNER JOIN" AND "ON" KEYWORD WITH CONDITION
+-- 'SELECT' > select data from a database
+-- 'orderid' > The column to select from the "orders" table
+-- 'orders.customerId' > The column to select from the "orders" table
+-- 'customerName' > The column to select from the "Customers" table
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'orders' > The first table to join
+-- 'INNER JOIN' > Used to combine rows from two or more tables based on a related column ***
+-- 'Customers' > The second table to join
+-- 'ON' > Used to specify the condition for joining the tables ***
+-- 'orders.customerId' > The column to join on from the "orders" table
+-- '=' > Equal to, returns rows where the value is equal to the specified value
+-- 'customers.customerId' > The column to join on from the "Customers" table
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+Select orderid, orders.customerId, customerName from orders inner join Customers on orders.customerId = customers.customerId;
