@@ -1,3 +1,6 @@
+--SAMPLE DATABASE DOWNLOAD LINKE--
+https://sample-videos.com/download-sample-sql.php
+
 -- SQL OPERATIONS --
 
 -- Fetch all data from sql database --
@@ -211,3 +214,81 @@ CREATE TABLE CustomerTest LIKE customers;
 -- ';' > Statement terminator, indicating the end of the SQL query
 
 Select orderid, orders.customerId, customerName from orders inner join Customers on orders.customerId = customers.customerId;
+
+NOTE : joins works like (first table's value's count x second table's value's count) so if in first table there is seven times "1" and in second table there is five times "1" then in the result table there will be 7x5 = 32 times "1".
+
+
+---------------------------------------------------------------------------------------------------------
+-- USING CTE TABLES (TEMPORARY TABLES) YOU CAN TEMPORARY CUSTOM TABLE DATA
+-- 'WITH' > Used to define a temporary result set, also known as a Common Table Expression (CTE) ***
+--'my_cte' > The name of the CTE
+-- 'AS' > Used to define the CTE
+-- '(' > Start of the CTE definition
+-- 'SELECT' > Select data from a database
+-- 'customerName' > The column to select from the "customers" table
+-- 'address' > The column to select from the "customers" table
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'customers' > The table to select from
+-- ')' > End of the CTE definition
+-- 'SELECT' > Select data from the CTE
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+--'my_cte' > The CTE to select from
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+WITH my_cte AS (SELECT customerName,address from customers) SELECT * FROM my_cte;
+
+-- USE COMPLEX CTE TABLE
+-- 'WITH' > Used to define a temporary result set, also known as a Common Table Expression (CTE) ***
+--'my_cte' > The name of the CTE
+-- 'AS' > Used to define the CTE
+-- '(' > Start of the CTE definition
+-- 'SELECT' > Select data from a database
+-- 'od.orderid' > The column to select from the "orders" table
+-- 'cs.customerName' > The column to select from the "customers" table
+-- 'cs.address' > The column to select from the "customers" table
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'orders' > The first table to join, aliased as "od"
+-- 'INNER JOIN' > Used to combine rows from two or more tables based on a related column ***
+-- 'customers' > The second table to join, aliased as "cs"
+-- 'ON' > Used to specify the condition for joining the tables ***
+-- 'od.CustomerID' > The column to join on from the "orders" table
+-- '=' > Equal to, returns rows where the value is equal to the specified value
+-- 'cs.CustomerID' > The column to join on from the "customers" table
+-- ')' > End of the CTE definition
+-- 'SELECT' > Select data from the CTE
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+--'my_cte' > The CTE to select from
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+WITH my_cte AS (SELECT od.orderid, cs.customerName,cs.address from orders od INNER join customers cs on od.CustomerID=cs.CustomerID) SELECT * FROM my_cte
+
+---------------------------------------------------------------------------------------------------------
+
+-- STORE PROCEDURE : SAVE A QUERY/FUNCTION TO USE IT LATER 
+-- 'DELIMITER' > Used to change the delimiter from the default semicolon (;) to a new delimiter (//) ***
+-- 'CREATE PROCEDURE' > Used to create a stored procedure ***
+-- 'GetCustomers' > The name of the stored procedure
+-- '(' > Start of the parameter list (in this case, no parameters)
+-- ')' > End of the parameter list
+-- 'BEGIN' > Start of the procedure body
+-- 'SELECT' > select data from a database
+-- '*' > Retrieve all columns (shorthand for selecting every column)
+-- 'FROM' > Specify the table(s) from which to retrieve data
+-- 'customers' > The table to select data from
+-- 'END' > End of the procedure body
+-- '//' > The new delimiter, used to terminate the procedure definition
+-- 'DELIMITER' > Used to reset the delimiter to the default semicolon (;)
+-- ';' > Statement terminator, indicating the end of the SQL query
+
+QUERY: 
+DELIMITER //
+CREATE PROCEDURE GetCustomers()
+BEGIN
+SELECT * FROM customers;
+END //
+DELIMITER ;
+
+TO USE IT : "CALL GetCustomers"
+NOTE : IN ABOVE LINE USE "CALL" KEYWORD TO USE A PROCEDURE
