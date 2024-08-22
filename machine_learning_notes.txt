@@ -1,1 +1,10 @@
+In Numerical data :
 
+Continues data = which is continues in counting like > 1.0025695848.. 
+Discrete data = which only have one figure like > 1 (no float)
+
+In categorical data: 
+nominal data = which are only options type (not in order)
+Example > yes or no
+ordinal data = values are in an order
+Example > junior level, medium level, senior level.
